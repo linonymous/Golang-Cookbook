@@ -1,10 +1,11 @@
 # Golang Cookbook
 
 ## Index
-
-* [What is Go](#what-is-go)
-* [Motivation](#motivation)
-* [Golang's Type System](#golang-type-system)
+   * [What is Go](#what-is-go) </br>
+   	o  [Motivation](#motivation) </br>
+	o  [Features](#golang-features) </br>
+	o  [Philosophy](#golang-philosophy) </br>
+   * [Golang's Type System](#golang-type-system)
 
 ### What is Go?
 
@@ -39,7 +40,7 @@ Modern application demands
 * Tooling support: test, profiling, benchmarking, formatting, godoc
 * Great built-in libraries: net/http, database, ioutil
 
-#### Golang philosophy?
+#### Golang philosophy
 		
 * ease of use (simplicity)
 * performance (efficiency)
