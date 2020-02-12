@@ -1,11 +1,14 @@
 # Golang Cookbook
 
 ## Contents
-   * [What is Go](#what-is-go) </br>
-   	o  [Motivation](#motivation) </br>
-	o  [Features](#golang-features) </br>
-	o  [Philosophy](#golang-philosophy) </br>
-   * [Golang's Type System](#golang-type-system)
+* [What is Go](#what-is-go)
+    * [Motivation](#motivation)
+    * [Features](#golang-features)
+    * [Philosophy](#golang-philosophy)
+    * [Interpreters and Compilers](#interpreters-and-compilers)
+    	* [Compiler](#compiler)
+	* [Interpreter](#interpreter)
+* [Golang's Type System](#golang-type-system)
 
 - - - -
 ### What is Go?
@@ -52,9 +55,10 @@ Modern application demands
 	- Go's Weaknesses
 		- Lack of generics
 
-#### Difference between interpreted language and compiled language
+#### Interpreters and Compilers
 * Interpreters and compilers are very similar in structure. The main difference is that an interpreter directly executes the instructions in the source programming language while a compiler translates those instructions into efficient machine code.
-##### Compiler (HLL - Machine Understandable code (assembly) - Machine)
+##### Compiler
+(HLL - Machine Understandable code (assembly) - Machine)
 - Lexical Analysis - find lexemes & tokens (keywords, identifier, operators in language)
 - Syntax Analysis - generates Abstract syntax tree(AST) using a sequence of tokens and validates the syntax
 - Semantic Analysis - Type inference, type checking
