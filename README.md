@@ -1,12 +1,13 @@
 # Golang Cookbook
 
-## Index
+## Contents
    * [What is Go](#what-is-go) </br>
    	o  [Motivation](#motivation) </br>
 	o  [Features](#golang-features) </br>
 	o  [Philosophy](#golang-philosophy) </br>
    * [Golang's Type System](#golang-type-system)
 
+- - - -
 ### What is Go?
 
 * Go is a programming language created by Google. It’s open-source and free.
@@ -51,38 +52,38 @@ Modern application demands
 	- Go's Weaknesses
 		- Lack of generics
 
-#### Interpreted language and compiled language difference
+#### Difference between interpreted language and compiled language
 * Interpreters and compilers are very similar in structure. The main difference is that an interpreter directly executes the instructions in the source programming language while a compiler translates those instructions into efficient machine code.
-	- Compiler (HLL - Machine Understandable code (assembly) - Machine)
-		- Lexical Analysis - find lexemes & tokens (keywords, identifier, operators in language)
-		- Syntax Analysis - generates Abstract syntax tree(AST) using a sequence of tokens and validates the syntax
-		- Semantic Analysis - Type inference, type checking
-		- Intermediate Code Generation - From AST, intermediate code is generated, ex 3 address code, where at most three operands can be in a statement
+##### - Compiler (HLL - Machine Understandable code (assembly) - Machine)
+- Lexical Analysis - find lexemes & tokens (keywords, identifier, operators in language)
+- Syntax Analysis - generates Abstract syntax tree(AST) using a sequence of tokens and validates the syntax
+- Semantic Analysis - Type inference, type checking
+- Intermediate Code Generation - From AST, intermediate code is generated, ex 3 address code, where at most three operands can be in a statement
 - Optimization - Optimize the code, convert into shorter and performant code
 - Final code generation - Translates the optimized intermediate code into assembly or machine-dependent code
-		- Interpreter
+
+##### - Interpreter
 - The interpreter also translates the program, but it does it one statement at a time
-		- Compiler Vs Interpreter
-			Compiler characteristics:
 
-spends a lot of time analyzing and processing the program
-the resulting executable is some form of machine-specific binary code
-the computer hardware interprets (executes) the resulting code
-program execution is fast
+##### Compiler Vs Interpreter
+###### Compiler characteristics:
 
-Interpreter characteristics:
+* Spends a lot of time analyzing and processing the program
+* The resulting executable is some form of machine-specific binary code
+* The computer hardware interprets (executes) the resulting code
+* Program execution is fast
 
-relatively little time is spent analyzing and processing the program
-the resulting code is some sort of intermediate code
-the resulting code is interpreted by another program
-program execution is relatively slow
+###### Interpreter characteristics:
 
+* Relatively little time is spent analyzing and processing the program
+* The resulting code is some sort of intermediate code
+* The resulting code is interpreted by another program
+* Program execution is relatively slow
 
 ### Golang Type System
 - A type of variable depicts the fundamental properties the variable is going to have. Some of these properties are, the size of the variable in memory, set of values that are allowed to be assigned to the variable, and operations allowed on the variable.
-	- Builtin types (int, float, bool, string)
-	- Composite types (map, slices, array, channel)
-	- User-defined types (struct, interfaces)
-	https://go101.org/article/type-system-overview.html
+- Builtin types (int, float, bool, string)
+- Composite types (map, slices, array, channel)
+- User-defined types (struct, interfaces)
+[Golang Types](https://go101.org/article/type-system-overview.html)
 
-A quick comprehensive read of Golang's concepts
