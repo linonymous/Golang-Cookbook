@@ -8,21 +8,23 @@
 ### What is Go? 
 	- Go is a programming language created by Google. It’s open-source and free.
 	- Go is statically typed compiled language.
-- A compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code)
+	- A compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code)
 	- It has support for concurrency from its roots. 
 	- Simple Yet Performant
 
-https://hackernoon.com/the-beauty-of-go-98057e3f0a7d	https://medium.com/rungo/introduction-to-go-programming-language-golang-89d16ca72bbf
+	[Beauty of GO](https://hackernoon.com/the-beauty-of-go-98057e3f0a7d)
+	[Introduction to Go](https://medium.com/rungo/introduction-to-go-programming-language-golang-89d16ca72bbf)
+	
 	- Motivation 
 		Modern application demands
-Efficiency(optimized memory/process management)
-scalability(how well it scales across processors, systems)
-Reliability(how crash-proof the code is) and 
-simplicity (simple to code/understand)
-Java is highly reliable and scalable, but lacks efficiency and lose simplicity for large applications
-Python is simple, but not so efficient (does not have intrinsic concurrency support) and reliable (dynamically typed).
-C, C++ are great at reliability, scale and efficiency but lack simplicity(double pointers, function pointers, etc.).
-These 4 were the major objectives in the designing of Golang.
+		Efficiency(optimized memory/process management)
+		scalability(how well it scales across processors, systems)
+		Reliability(how crash-proof the code is) and 
+		simplicity (simple to code/understand)
+			Java is highly reliable and scalable, but lacks efficiency and lose simplicity for large applications
+			Python is simple, but not so efficient (does not have intrinsic concurrency support) and reliable (dynamically typed).
+			C, C++ are great at reliability, scale and efficiency but lack simplicity(double pointers, function pointers, etc.).
+		These 4 were the major objectives in the designing of Golang.
 
 - Golang features?
 	- Strongly/statically Typed
