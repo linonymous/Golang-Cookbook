@@ -50,13 +50,14 @@ Modern application demands
 	- fast compilation/builds
 	- Go's Weaknesses
 		- Lack of generics
-	- Interpreted language and compiled language difference
-- Interpreters and compilers are very similar in structure. The main difference is that an interpreter directly executes the instructions in the source programming language while a compiler translates those instructions into efficient machine code.
-		- Compiler (HLL - Machine Understandable code (assembly) - Machine)
-- Lexical Analysis - find lexemes & tokens (keywords, identifier, operators in language)
-- Syntax Analysis - generates Abstract syntax tree(AST) using a sequence of tokens and validates the syntax
-			- Semantic Analysis - Type inference, type checking
-- Intermediate Code Generation - From AST, intermediate code is generated, ex 3 address code, where at most three operands can be in a statement
+
+#### Interpreted language and compiled language difference
+* Interpreters and compilers are very similar in structure. The main difference is that an interpreter directly executes the instructions in the source programming language while a compiler translates those instructions into efficient machine code.
+	- Compiler (HLL - Machine Understandable code (assembly) - Machine)
+		- Lexical Analysis - find lexemes & tokens (keywords, identifier, operators in language)
+		- Syntax Analysis - generates Abstract syntax tree(AST) using a sequence of tokens and validates the syntax
+		- Semantic Analysis - Type inference, type checking
+		- Intermediate Code Generation - From AST, intermediate code is generated, ex 3 address code, where at most three operands can be in a statement
 - Optimization - Optimize the code, convert into shorter and performant code
 - Final code generation - Translates the optimized intermediate code into assembly or machine-dependent code
 		- Interpreter
