@@ -80,6 +80,8 @@ Modern application demands
 * The resulting code is interpreted by another program
 * Program execution is relatively slow
 
+- - - - 
+
 ### Golang Type System
 - A type of variable depicts the fundamental properties the variable is going to have. Some of these properties are, the size of the variable in memory, set of values that are allowed to be assigned to the variable, and operations allowed on the variable.
 - Builtin types (int, float, bool, string)
