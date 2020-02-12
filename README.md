@@ -3,6 +3,7 @@
 ## Index
 
 * [What is Go](#what-is-go)
+* [Motivation](#motivation)
 * [Golang's Type System](#golang-type-system)
 
 ### What is Go?
@@ -14,38 +15,38 @@
 * SYP (Simple Yet Performant)
 
 	[Beauty of GO](https://hackernoon.com/the-beauty-of-go-98057e3f0a7d)
+	
 	[Introduction to Go](https://medium.com/rungo/introduction-to-go-programming-language-golang-89d16ca72bbf)
 	
-	- Motivation 
-		Modern application demands
-		* Efficiency(optimized memory/process management)
-		* scalability(how well it scales across processors, systems)
-		* Reliability(how crash-proof the code is) and 
-		* simplicity (simple to code/understand)
-			- Java is highly reliable and scalable, but lacks efficiency and lose simplicity for large applications
-			- Python is simple, but not so efficient (does not have intrinsic concurrency support) and reliable (dynamically typed).
-			- C, C++ are great at reliability, scale and efficiency but lack simplicity(double pointers, function pointers, etc.).
-			- These 4 were the major objectives in the designing of Golang.
+#### Motivation 
+Modern application demands
+* Efficiency(optimized memory/process management)
+* scalability(how well it scales across processors, systems)
+* Reliability(how crash-proof the code is) and 
+* simplicity (simple to code/understand)
+	- Java is highly reliable and scalable, but lacks efficiency and lose simplicity for large applications
+	- Python is simple, but not so efficient (does not have intrinsic concurrency support) and reliable (dynamically typed).
+	- C, C++ are great at reliability, scale and efficiency but lack simplicity(double pointers, function pointers, etc.).
 
-- Golang features?
-	- Strongly/statically Typed
-	- Faster builds/compilations
-	- Portable
-	- Intrinsic Concurrency support
-	- Interfaces (decoupled, simple code)
-	- Garbage Collection
-	- No Exceptions (subjective): handle error yourself
-	- Tooling support: test, profiling, benchmarking, formatting, godoc
-	- Great built-in libraries: net/http, database, ioutil
+#### Golang features
+* Strongly/statically Typed
+* Faster builds/compilations
+* Portable
+* Intrinsic Concurrency support
+* Interfaces (decoupled, simple code)
+* Garbage Collection
+* No Exceptions (subjective): handle error yourself
+* Tooling support: test, profiling, benchmarking, formatting, godoc
+* Great built-in libraries: net/http, database, ioutil
 
-	- Golang philosophy?
+#### Golang philosophy?
 		
-		- ease of use (simplicity)
-		- performance (efficiency)
-		- Strongly/statically typed (reliability)
-		- First-class concurrency & multithreading support (scalability)
-			- was developed as an alternative to c++ & c
-			- fast compilation/builds
+* ease of use (simplicity)
+* performance (efficiency)
+* Strongly/statically typed (reliability)
+* First-class concurrency & multithreading support (scalability)
+	- was developed as an alternative to c++ & c
+	- fast compilation/builds
 	- Go's Weaknesses
 		- Lack of generics
 	- Interpreted language and compiled language difference
