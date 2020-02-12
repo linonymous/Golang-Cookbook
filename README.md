@@ -145,3 +145,71 @@ Modern application demands
 - Now, a new slice will be allocated and the data will be copied, but the pointer variable in step 2, will still point to the old copy in the old slice, GC would not delete old slice. And causes memory leak problem in golang
 
 https://medium.com/dm03514-tech-blog/sre-debugging-simple-memory-leaks-in-go-e0a9e6d63d4d
+
+### interfaces, structs, methods, functions
+
+- https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html
+- https://www.ardanlabs.com/blog/2017/07/interface-semantics.html
+- https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html
+
+#### Struct
+- struct, like C, is a way to group types together to create another user-defined type.
+- It has named fields, The type keyword introduces the new type, and the struct keyword lays out the intrinsic property of type to have different fields inside.
+- unnamed struct fields can be accessed with type names. A.int, a.B, etc.
+- Anonymous structs with the same fields can be assigned to name struct without explicit type conversion, whereas, two named structs can not be assigned to each other without explicit type conversion. 
+
+- TODO: WRITE STRUCTS memory allocation
+
+##### Methods
+- A method in golang is the function defined on the receiver. A receiver might be a pointer receiver or a value receiver.
+- Variable of type struct and *struct, are able to access all the methods, with pointer receiver as well as value receiver
+- Whereas, when it comes to interface, we deal with method sets.
+- Struct variable, with type T tends to have methods with value receiver in its method sets.
+- Whereas, struct variables with type *T, tends to have methods with value as well as pointer receiver in its method sets.
+- This distinction arises because if an interface value contains a pointer *T, a method call can obtain a value by dereferencing the pointer, but if an interface value contains a value T, there is no safe way for a method call to obtain a pointer.
+- The method set of the corresponding pointer type *T is the set of all methods with receiver *T or T
+- The method set of any other type T consists of all methods with receiver type T.
+ 
+##### Functions
+- Functions are normal functions defined without any receiver, which means functions are not bound to any types in general.
+
+#### Interface & Decoupling
+
+- Interface is a contract with pre-defined set of methods
+- Any type which has its method set as a superset to the interface method set, are said to agree to the contract.
+- Interfaces are used to decouple the code, in a way, that an interface with the defined method set abstracts out the minimal behavior from the concrete implementation, giving the freedom to the user to have a generic dependency on basic required methods rather than the concrete struct itself.
+- Decoupling using interface   
+	https://stackoverflow.com/questions/49077220/package-decoupling-in-go
+https://www.sage42.org/2019/01/30/how-to-fix-tightly-coupled-go-code/
+
+#### Pointer vs Value Receiver
+- Use pointer receiver, when you want to mutate variables, or when struct is bigger in size, to optimize the memory
+- use-value receiver when you don't want to mutate variables.
+- The receivers on a type should be consistent.
+	https://golang.org/doc/faq#different_method_sets
+
+#### Mutability and Immutability
+
+- Mutability means, when a change is made to a variable, it changes in place.
+- immutability is when, a change is made to a variable, a new variable with changes is allocated 
+- Thus, methods with a pointer receiver helps when you need to change something in place. Whereas, value receivers are used when you want immutability.
+	
+#### Embeddings, struct embeddings, interface embeddings
+
+- Embedding, as the word says, to embed one thing in another.
+- In golang, it is done by adding the field of one type in another
+- Interfaces, might embed another interface, and struct might embed another structs, and interface.
+- When a struct is embedded, it brings its own methods along with it.
+- When a struct embeds an interface means, it can embed any struct that implements the interface. This means the methods are by default promoted to the upper type that implements it. And as the methods are not defined, you can define/override the methods you want.
+- When we embed a type, the methods of that type become methods of the outer type(called Method Promotion), but when they are invoked the receiver of the method is the inner type, not the outer one.
+-https://stackoverflow.com/questions/24537443/meaning-of-a-struct-with-embedded-anonymous-interface
+
+##### Method Promotion Rules
+- Given a struct type S and a type named T, promoted methods are included in the method set of the struct as follows:
+- If S contains an anonymous field T, the method sets of S and *S both include promoted methods with receiver T.
+- The method set of *S also includes promoted methods with receiver *T. 
+- If S contains an anonymous field *T, the method sets of S and *S both include promoted methods with receiver T or *T.
+- If S contains an anonymous field T, the method set of S does not include promoted methods with receiver *T.
+			
+https://golang.org/doc/effective_go.html#embedding
+	
