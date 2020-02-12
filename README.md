@@ -7,10 +7,19 @@
     * [Philosophy](#golang-philosophy)
     * [Interpreters and Compilers](#interpreters-and-compilers)
     	* [Compiler](#compiler)
-	* [Interpreter](#interpreter)
+        * [Interpreter](#interpreter)
+        * [Compiler Vs Interpreters](#compiler-vs-interpreter)
+            * [Compiler characteristics](#compiler-characteristics)
+            * [Interpreter characteristics](#interpreter-characteristics)
 * [Golang's Type System](#golang-type-system)
+* [Array, Slice and Map](#array-slice-and-map)
+    * [Array](#array)
+    * [Slice](#slice)
+    * [Map](#map)
+    * [Memory Leak](#memory-leak)
 
 - - - -
+
 ### What is Go?
 
 * Go is a programming language created by Google. It’s open-source and free.
@@ -70,14 +79,14 @@ Modern application demands
 - The interpreter also translates the program, but it does it one statement at a time
 
 ##### Compiler Vs Interpreter
-###### Compiler characteristics:
+###### Compiler characteristics
 
 * Spends a lot of time analyzing and processing the program
 * The resulting executable is some form of machine-specific binary code
 * The computer hardware interprets (executes) the resulting code
 * Program execution is fast
 
-###### Interpreter characteristics:
+###### Interpreter characteristics
 
 * Relatively little time is spent analyzing and processing the program
 * The resulting code is some sort of intermediate code
@@ -93,3 +102,46 @@ Modern application demands
 - User-defined types (struct, interfaces)
 [Golang Types](https://go101.org/article/type-system-overview.html)
 
+- - - -
+
+### Array, Slice and Map
+#### Array
+- Two byte data structure
+- static allocation, size can’t be increased/decreased
+- size is the part of type itself, thus [3]int is different than [5]int
+- First byte is the pointer to array(address)
+- Second byte is the fixed length of array
+#### Slice
+- Slice is the extension to the arrays
+- Dynamic allocation
+- Slice wraps around arrays to give flexibility
+- Slice holds references to an underlying array
+- Three-byte data structure, the first byte is the pointer
+- the second byte is the length, indicating, number of elements present in the slice.
+- Third byte is capacity, indicating a number of elements in an underlying array, starting from the first element in the slice.
+- builtin append function takes slice as the first argument and the element to be appended as the second argument
+- When the size of slice exceeds during append, a new static array with size *= 2 is allocated at the backend, all the previous elements are copied and a new slice is returned back with appended data.
+
+	SLICES ARE DYNAMIC WINDOWS TO STATIC ARRAYS
+
+#### Map
+- Is a data structure that maps keys to values
+- Keys are unique, and these keys uniquely identify values associated
+- KeyType can be any type that is comparable
+- Maps in golang are implemented as a hash table
+- There is an underlying array, where each element is the bucket, the number of elements in this array are always the power of two.
+- Hash is calculated against the key, and lower-order bits of the hash are used to choose the bucket in the array.
+- Once the bucket is chosen, each bucket is associated with two data structures at the backend, the first data structure is in array of higher-order bits of hash to distinguish the keys in the same bucket. Second one is the byte array that stores the keys and values in a byte array.
+- https://www.ardanlabs.com/blog/2013/08/understanding-slices-in-go-programming.html
+- https://blog.golang.org/go-slices-usage-and-internals
+- https://www.ardanlabs.com/blog/2013/12/macro-view-of-map-internals-in-go.html	   
+
+#### Memory leak
+
+- Happens when unrequited memory is present (and GC can not clean it)
+- Create a slice of a user-defined type
+- point a variable to any element at any index
+- perform append operation till the time capacity doubles
+- Now, a new slice will be allocated and the data will be copied, but the pointer variable in step 2, will still point to the old copy in the old slice, GC would not delete old slice. And causes memory leak problem in golang
+
+https://medium.com/dm03514-tech-blog/sre-debugging-simple-memory-leaks-in-go-e0a9e6d63d4d
