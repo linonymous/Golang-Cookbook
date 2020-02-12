@@ -5,12 +5,13 @@
 * [What is Go](#what-is-go)
 * [Golang's Type System](#golang-type-system)
 
-### What is Go? 
-	- Go is a programming language created by Google. It’s open-source and free.
-	- Go is statically typed compiled language.
-	- A compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code)
-	- It has support for concurrency from its roots. 
-	- Simple Yet Performant
+### What is Go?
+
+	* Go is a programming language created by Google. It’s open-source and free.
+	* Go is statically typed compiled language.
+	* A compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code)
+	* It has support for concurrency from its roots. 
+	* Simple Yet Performant
 
 	[Beauty of GO](https://hackernoon.com/the-beauty-of-go-98057e3f0a7d)
 	[Introduction to Go](https://medium.com/rungo/introduction-to-go-programming-language-golang-89d16ca72bbf)
