@@ -178,7 +178,7 @@ Modern application demands
 - builtin append function takes slice as the first argument and the element to be appended as the second argument
 - When the size of slice exceeds during append, a new static array with size *= 2 is allocated at the backend, all the previous elements are copied and a new slice is returned back with appended data.
 
-	SLICES ARE DYNAMIC WINDOWS TO STATIC ARRAYS
+	> SLICES ARE DYNAMIC WINDOWS TO STATIC ARRAYS
 
 #### Map
 - Is a data structure that maps keys to values
@@ -382,7 +382,9 @@ https://stackoverflow.com/questions/15983872/difference-between-user-level-and-k
 - Parallelism is when tasks literally run at the same time.
 	
 #### Data Race
-- With great power comes great responsibility!
+
+> With great power comes great responsibility!
+
 - Golang is blessed with top-notch concurrent support, but it raises the vulnerability for shared data(i.e. Data becomes inconsistent).
 - Shared channels are synchronized for themselves, thus it is not a thing to worry about.
 - But, if two goroutines, end up executing same piece of code, with shared variables, the output becomes non-deterministic, depending upon which goroutine ran first and which ran second. 
