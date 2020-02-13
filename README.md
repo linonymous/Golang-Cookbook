@@ -46,6 +46,8 @@
         * [Concurrency vs Parallelization](#concurrency-vs-parallelization)
         * [Data Race](#data-race)
         * [Synchronization](#synchronization)
+             * [Sync.Mutex](#syncmutex)
+             * [Sync.WaitGroup](#syncwaitgroup)
 - - - -
 
 ### What is Go?
