@@ -346,9 +346,9 @@ Golang does exactly the same. It multiplexes the goroutines over the OS threads.
 
 - Underhood Concurrency(Parallelism for P>1 :P )
 In terminology, this is called the PMG model.
-P: processor
-M: OS thread
-G: Goroutine
+	* P: processor
+	* M: OS thread
+	* G: Goroutine
 - There are N threads running on a processor, and M threads multiplexed over them. It’s M: N mapping. M goroutines need to be scheduled on N OS threads that run on at most GOMAXPROCS. numbers of processors(N <= GOMAXPROCS)
 Every processor has a LOCAL RUN QUEUE. Goroutines in LRQ are picked up one by one by the scheduler to schedule them on the owner processor of LRQ.
 - There is a GLOBAL RUN QUEUE, GRQ. GRQ is shared across all threads. As LRQ is local, thus, scheduler threads do not need the locks over it. But, GRQ locking is mandatory. Any task which is not assigned to any processor lives in GRQ. 
