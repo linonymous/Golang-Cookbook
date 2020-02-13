@@ -58,7 +58,7 @@ Motto: A comprehensive document of Golang, with minimalistic, simple explanation
         * [Usage](#usage)
 * [An import with a blank identifier](#an-import-with-a-blank-identifier)
 * [Type Assertions](#type-assertions)
-    * [Usage](#type-assertions#usage)
+    * [Usage](#usage)
 
 TODO: 
 - Memory Management Golang
