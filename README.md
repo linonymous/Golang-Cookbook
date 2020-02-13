@@ -48,6 +48,9 @@
         * [Synchronization](#synchronization)
              * [Sync.Mutex](#syncmutex)
              * [Sync.WaitGroup](#syncwaitgroup)
+* [Channels](#channels)
+     * [What are Channels?](#what-are-channels?)
+     * [Types of channels and usage](#types-of-channels-and-usage)
 - - - -
 
 ### What is Go?
@@ -379,3 +382,25 @@ https://stackoverflow.com/questions/15983872/difference-between-user-level-and-k
 - When we want all goroutine to end to continue ahead in the program, we use sync.WaitGroup, which halts the program using wg.Wait() so that all goroutines registered with wg.Add(1), marks them as completed using
 wg.Done()
 - This helps in synchronizing multiple goroutines.  
+
+### Channels
+#### What are Channels?
+- Channels are type-safe queues that have intelligence, to control the behavior of any goroutine attempting for sending & receiving on goroutine.
+- A channel helps one goroutine to signal an event to another goroutine and are synchronized. 
+- A channel is a synchronized communication object used by goroutines to communicate with each other.
+- A goroutine can send some value over a channel and another goroutine can receive some value from the same channel.
+- Channels are inherently synchronized. :) 
+#### Types of channels and usage
+- There are two types of channels
+##### Unbuffered Channels:
+- Channels without capacity are known as Unbuffered channels, therefore it requires both goroutines to make the exchange of resources
+- When one tries to send resources over a channel, and there’s no goroutine to receive it, the sender goroutine is locked and made to wait.
+- Similarly, when one goroutine tries to receive the resource, and there’s no one to send it, the receiver goroutine is locked and made to wait.
+##### Buffered Channels:
+- Buffered channels have the capacity. Thus they behave quite differently.
+- When a buffered channel is full, and sender goroutine wants to send a resource over the channel, the sender goroutine is locked and made to wait.
+- When a buffered channel is empty, and receiver goroutine wants to receive a resource over a channel, the receiver goroutine is locked and made to wait.
+##### Usage
+- ‘<-’ operator is used along with channels.
+- channel <- data : puts data onto the channel
+- data := <- channel : receives data out of channel
