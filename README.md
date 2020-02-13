@@ -1,4 +1,6 @@
-# Golang Cookbook
+# Golang Cookbook 
+
+Motto: A comprehensive document of Golang, with minimalistic, simple explanations of concepts.
 
 ## Contents
 * [What is Go](#what-is-go)
