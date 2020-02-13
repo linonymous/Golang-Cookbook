@@ -5,6 +5,7 @@
     * [Motivation](#motivation)
     * [Features](#golang-features)
     * [Philosophy](#golang-philosophy)
+    * [Weakness](#weakness)
     * [Interpreters and Compilers](#interpreters-and-compilers)
     	* [Compiler](#compiler)
         * [Interpreter](#interpreter)
@@ -29,6 +30,22 @@
 * [make vs new](#make-vs-new)
     * [make](#make)
     * [new](#new)
+* [Leaky Buffer](#leaky-buffer)
+* [Error Handling](#error-handling)
+    * [Error](#error)
+    * [Panic](#panic)
+    * [Recover](#recover)
+    * [Defer](#defer)
+* [Goroutines](#goroutines)
+    * [What are Goroutines?](what-are-goroutines?)
+    * [Advantages of Goroutines](advantages-of-goroutines)
+    * [Goroutines Internals](#goroutines-internals)
+        * [Thread Basics](#thread-basics)
+        * [Multiplexing Threads](#multiplexing-threads)
+        * [Efficiency of Goroutine](#efficiency-of-goroutine)
+        * [Concurrency vs Parallelization](#concurrency-vs-parallelization)
+        * [Data Race](#data-race)
+        * [Synchronization](#synchronization)
 - - - -
 
 ### What is Go?
@@ -46,9 +63,9 @@
 #### Motivation 
 Modern application demands
 * Efficiency(optimized memory/process management)
-* scalability(how well it scales across processors, systems)
+* Scalability(how well it scales across processors, systems)
 * Reliability(how crash-proof the code is) and 
-* simplicity (simple to code/understand)
+* Simplicity (simple to code/understand)
 	- Java is highly reliable and scalable, but lacks efficiency and lose simplicity for large applications
 	- Python is simple, but not so efficient (does not have intrinsic concurrency support) and reliable (dynamically typed).
 	- C, C++ are great at reliability, scale and efficiency but lack simplicity(double pointers, function pointers, etc.).
@@ -72,8 +89,10 @@ Modern application demands
 * First-class concurrency & multithreading support (scalability)
 	- was developed as an alternative to c++ & c
 	- fast compilation/builds
-	- Go's Weaknesses
-		- Lack of generics
+
+#### Weakness
+
+* Lack of generics
 
 #### Interpreters and Compilers
 * Interpreters and compilers are very similar in structure. The main difference is that an interpreter directly executes the instructions in the source programming language while a compiler translates those instructions into efficient machine code.
@@ -234,3 +253,127 @@ https://golang.org/doc/effective_go.html#embedding
 - Creates slices, maps, and channels only, and it returns an initialized (not zeroed) value of type T (not *T).
 - The reason for the distinction is that these three types represent, under the covers, references to data structures that must be initialized before use. A slice, for example, is a three-item descriptor containing a pointer to the data (inside an array), the length, and the capacity, and until those items are initialized, the slice is nil. For slices, maps, and channels, make initializes the internal data structure and prepares the value for use. 
 
+### Leaky Buffer
+- also called as Buffer pools
+- Whenever we are using buffers in our code, some functions just use buffers for storage, we allocate them at the start of the function and leave them for the garbage collector to clean. 
+- In some applications, this is frustrating for garbage collectors and has a performance impact. Thus, it is recommended to use buffer pools, and allocate them in advance and use them whenever required. These buffers are called leaky buffers or buffer pools. :) 
+
+### Error handling
+
+#### Error
+- error is an interface in golang, which has an Error() method that returns a string.
+- Whenever unwanted or unexpected happens in the code, an error is returned.
+- Go doesn’t have exceptions, but go recommends that every function has an error returned if something happens.
+- Ingo error handling is done, by using this error interface. Where we add another field to be returned from a function which is an error interface. If anything unexpected happens inside the function, the method returns the result along with with nonempty, not nil error value from the function.
+
+#### Panic
+- Panic is a built-in function that stops the ordinary flow of control and begins panicking. 
+- When the function F calls panic, execution of F stops, any deferred functions in F are executed normally, and then F returns to its caller. 
+- To the caller, F then behaves like a call to panic. The process continues up the stack until all functions in the current goroutine have returned, at which point the program crashes. Panics can be initiated by invoking panic directly. They can also be caused by runtime errors, such as out-of-bounds array accesses.
+- When to use panics
+- An unrecoverable error where your program cannot guarantee the state (thus being unrecoverable)
+- Or a programmer error (e.g. passing a wrong type)
+
+- https://blog.golang.org/defer-panic-and-recover
+
+#### Recover
+- is a built-in function that regains control of a panicking goroutine. 
+- Recover is only useful inside deferred functions. 
+- During normal execution, a call to recover will return nil and have no other effect. If the current goroutine is panicking, a call to recover will capture the value given to panic and resume normal execution.
+- Executing a call to recover inside a deferred function stops the panicking sequence by restoring normal execution and retrieves the error value passed to the call of panic. If recovery is called outside the deferred function, it will not stop a panicking sequence.
+
+#### Defer
+- Defer is used to ensure that a function call is performed later in a program’s execution, usually for purposes of cleanup. defer is often used where e.g. ensure and finally would be used in other languages.
+
+- Try   - Catch   - Finally
+- Panic - Recover - Defer
+
+
+### Goroutines
+
+#### What are goroutines?
+- Goroutines are functions/methods that run concurrently with other functions/methods.
+- Goroutines are lightweight threads, they exist in userspace and are managed by go runtime, a library to manage memory, scheduling, and garbage collection.
+- Everything in golang is a part of a goroutine. A simple main function is executed by a goroutine.
+- A goroutine is triggered by using the ‘go’ keyword with a function call. 
+- Like every thread implementation, for every goroutine, a stack is created, and every stackframe signifies the new function call, function arguments, whereas some shared variables are stored on the heap, whose decision is made by the compiler itself using escape analysis algorithm.
+
+#### Advantages of Goroutines
+- Extremely cheap when compared to threads 
+- Goroutines are multiplexed over one or more kernel threads, i.e. a system can have thousands of goroutines running in user space and multiplexed on single os thread. Go abstracts out the intricate details of the implementation.
+- Golang has default support for communication between goroutines, where, two goroutines can exchange information, trigger events using channels in golang.
+
+#### Goroutines Internals
+##### Thread Basics
+- In Linux terminology, there are two types of threads, user-space threads(often called as green threads) and kernel space threads.
+https://www.andrew.cmu.edu/user/gkesden/ucsd/classes/sp16/cse120-a/applications/ln/cse120-sp16-lecture4.pdf
+http://www.cs.iit.edu/~cs561/cs450/ChilkuriDineshThreads/dinesh's%20files/User%20and%20Kernel%20Level%20Threads.html
+- Kernel space threads are created and managed by OS. It runs kernel code and is not associated with any userspace process. Kernel maintains a table for all kernel threads. Thus, the scheduler can give priority to a process with a large number of threads over the process with comparatively fewer threads.
+- Kernel level threads, on the contrary, are inefficient and slow.
+- Kernel-Level threads make concurrency much cheaper than process because much less state to allocate and initialize. However, for fine-grained concurrency, kernel-level threads still suffer from too much overhead in context switching because thread operations still require system calls. Ideally, we require thread operations to be as fast as a procedure call. Kernel-Level threads have to be general to support the needs of all programmers, languages, runtimes, etc. For such fine-grained concurrency we still need "cheaper" threads.
+- To make threads cheap and fast, they need to be implemented at the user level. User-Level threads are managed entirely by the run-time system (user-level library).The kernel knows nothing about user-level threads and manages them as if they were single-threaded processes.User-Level threads are small and fast, each thread is represented by a PC, register, stack, and small thread control block. Creating a new thread, switching between threads, and synchronizing threads are done via procedure call. i.e no kernel involvement. User-Level threads are hundred times faster than Kernel-Level threads.
+
+##### Multiplexing Threads
+	
+- Thus to get the best of both worlds, it's better to have few OS-level threads (Good at concurrency and scheduling, but inefficient for creation, maintenance, context switch, and synchronization because it involves system calls) and many userspace goroutines (lightweight, easy to create, but not known to OS so poor scheduling) multiplexed over them.
+Golang does exactly the same. It multiplexes the goroutines over the OS threads.
+
+- Underhood Concurrency(Parallelism for P>1 :P )
+In terminology, this is called the PMG model.
+P: processor
+M: OS thread
+G: Goroutine
+- There are N threads running on a processor, and M threads multiplexed over them. It’s M: N mapping. M goroutines need to be scheduled on N OS threads that run on at most GOMAXPROCS. numbers of processors(N <= GOMAXPROCS)
+Every processor has a LOCAL RUN QUEUE. Goroutines in LRQ are picked up one by one by the scheduler to schedule them on the owner processor of LRQ.
+- There is a GLOBAL RUN QUEUE, GRQ. GRQ is shared across all threads. As LRQ is local, thus, scheduler threads do not need the locks over it. But, GRQ locking is mandatory. Any task which is not assigned to any processor lives in GRQ. 
+Whenever the scheduler does not find any thread on LRQ, then it performs THREAD STEALING, that, it randomly accesses the LRQs of other processors (locking comes into picture) and steals half of the workload, means half of the goroutines, if not found, searches for goroutines in GRQ. 
+- Algorithm
+runtime.schedule() {
+    // only 1/61 of the time, check the global runnable queue for a G.
+    // if not found, check the local queue.
+    // if not found,
+    //     try to steal from other Ps.
+    //     if not, check the global runnable queue.
+    //     if not found, poll network.
+}
+https://rakyll.org/scheduler/
+https://stackoverflow.com/questions/15983872/difference-between-user-level-and-kernel-supported-threads
+
+- Golang scheduler is cooperative and partially preemptive. The cooperative scheduler is one where the process will run till it relinquishes the control on the CPU. Preemptive is one where processes are preempted after the time slice assigned is over. Go runtime makes the preemption, and thus it is nondeterministic.
+
+#### Efficiency of Goroutine
+- Less memory consumption (few kilobytes per goroutine)
+- Less setup and teardown cost (after all goroutines are in user space)
+- Context switch cost is less, as the scheduling is cooperative and non-preemptive.
+- Goroutines are cooperatively scheduled. In cooperative scheduling, there is no concept of the scheduler time slice. In such scheduling, Goroutines yield the control periodically when they are idle or logically blocked in order to run multiple Goroutines concurrently. The switch between Goroutines happens only at well-defined points — when an explicit call is made to the Go Runtime scheduler. And those well-defined points are:
+- Channels send and receive operations if those operations would block.
+- The Go statement, although there is no guarantee that the new Goroutine will be scheduled immediately.
+- Blocking syscalls like file and network operations.
+- After being stopped for a garbage collection cycle.
+
+#### Concurrency vs Parallelization
+- Concurrency is when tasks can start, run and complete in overlapping periods of time, for example, multitasking on a processor.
+- Parallelism is when tasks literally run at the same time.
+	
+#### Data Race
+- With great power comes great responsibility!
+- Golang is blessed with top-notch concurrent support, but it raises the vulnerability for shared data(i.e. Data becomes inconsistent).
+- Shared channels are synchronized for themselves, thus it is not a thing to worry about.
+- But, if two goroutines, end up executing same piece of code, with shared variables, the output becomes non-deterministic, depending upon which goroutine ran first and which ran second. 
+- These situations, when data is accessed by two or more goroutines, and as the data is shared, the result becomes non-deterministic, are called race conditions.
+- Go by default has a tool to detect the race conditions. This is easy, just use “-race” option in go command-line tools.
+- Ex. go run -race main.go
+
+#### Synchronization
+- The piece of code, vulnerable to data race is known as the critical section. Thus, whenever, two concurrent threads accessing this piece of code, it is necessary to synchronize them. 
+- For the same purpose, go has a sync package, that helps in synchronizing goroutines. The most common synchronization primitives are mutex and waitgroups. 
+
+##### Sync.Mutex
+- When we want to share a variable or a piece of code amongst goroutines, it is mandatory to lock this critical section with some lock, so that data race condition might not happen and the behavior of the program remains deterministic.
+- Sync.Mutex is based upon mutual exclusion
+- mutex.Lock() & mutex.Unlock()
+##### Sync.WaitGroup
+- Sync.WaitGroup provides a goroutine synchronization mechanism in Golang and is used for waiting for a collection of goroutines to finish.
+- When we want all goroutine to end to continue ahead in the program, we use sync.WaitGroup, which halts the program using wg.Wait() so that all goroutines registered with wg.Add(1), marks them as completed using
+wg.Done()
+- This helps in synchronizing multiple goroutines.  
