@@ -26,6 +26,9 @@
     * [Mutability and Immutability](#mutability-and-immutability)
     * [Embeddings](#embeddings)
     * [Method Promotion Rules](#method-promotion-rules)
+* [make vs new](#make-vs-new)
+    * [make](#make)
+    * [new](#new)
 - - - -
 
 ### What is Go?
@@ -221,4 +224,13 @@ https://www.sage42.org/2019/01/30/how-to-fix-tightly-coupled-go-code/
 - If S contains an anonymous field T, the method set of S does not include promoted methods with receiver *T.
 			
 https://golang.org/doc/effective_go.html#embedding
-	
+
+#### make vs new
+
+#### new
+- Is a built-in function that allocates memory, but unlike its namesakes in some other languages it does not initialize the memory, it only zeros it. That is, new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T. In Go terminology, it returns a pointer to a newly allocated zero value of type T.
+
+#### make 
+- Creates slices, maps, and channels only, and it returns an initialized (not zeroed) value of type T (not *T).
+- The reason for the distinction is that these three types represent, under the covers, references to data structures that must be initialized before use. A slice, for example, is a three-item descriptor containing a pointer to the data (inside an array), the length, and the capacity, and until those items are initialized, the slice is nil. For slices, maps, and channels, make initializes the internal data structure and prepares the value for use. 
+
