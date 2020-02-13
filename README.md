@@ -17,11 +17,15 @@
     * [Slice](#slice)
     * [Map](#map)
     * [Memory Leak](#memory-leak)
-* [Interface and Structs](#interfacce_and_struct)
+* [Interface and Structs](#interface-and-struct)
     * [Struct](#struct)
         * [Methods](#methods)
         * [Functions](#functions)
     * [Decoupling using interfaces](#decoupling-using-interface)
+    * [Pointer vs Value Receiver](#pointer-vs-value-receiver)
+    * [Mutability and Immutability](#mutability-and-immutability)
+    * [Embeddings](#embeddings)
+    * [Method Promotion Rules](#method-promotion-rules)
 - - - -
 
 ### What is Go?
@@ -198,8 +202,9 @@ https://www.sage42.org/2019/01/30/how-to-fix-tightly-coupled-go-code/
 - immutability is when, a change is made to a variable, a new variable with changes is allocated 
 - Thus, methods with a pointer receiver helps when you need to change something in place. Whereas, value receivers are used when you want immutability.
 	
-#### Embeddings, struct embeddings, interface embeddings
+#### Embeddings
 
+- interface embedding & struct embedding
 - Embedding, as the word says, to embed one thing in another.
 - In golang, it is done by adding the field of one type in another
 - Interfaces, might embed another interface, and struct might embed another structs, and interface.
