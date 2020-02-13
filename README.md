@@ -56,6 +56,22 @@ Motto: A comprehensive document of Golang, with minimalistic, simple explanation
         * [Buffered Channels](#buffered-channels)
         * [Unbuffered Channels](#unbuffered-channels)
         * [Usage](#usage)
+
+TODO: 
+- Memory Management Golang
+	- Stack & Heap memory management	
+	- Garbage Collection
+	- Escape Analysis
+- type assertions
+- dependency management
+		- gomodules - submodules
+		- godep
+- Packaging basics
+	- Package designing
+	- workflow basics
+	- Init function
+	- main function 
+
 - - - -
 
 ### What is Go?
