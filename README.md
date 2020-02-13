@@ -17,7 +17,11 @@
     * [Slice](#slice)
     * [Map](#map)
     * [Memory Leak](#memory-leak)
-
+* [Interface and Structs](#interfacce_and_struct)
+    * [Struct](#struct)
+        * [Methods](#methods)
+        * [Functions](#functions)
+    * [Decoupling using interfaces](#decoupling_using_interfaces)
 - - - -
 
 ### What is Go?
@@ -146,7 +150,7 @@ Modern application demands
 
 https://medium.com/dm03514-tech-blog/sre-debugging-simple-memory-leaks-in-go-e0a9e6d63d4d
 
-### interfaces, structs, methods, functions
+### interface and struct
 
 - https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html
 - https://www.ardanlabs.com/blog/2017/07/interface-semantics.html
@@ -173,7 +177,7 @@ https://medium.com/dm03514-tech-blog/sre-debugging-simple-memory-leaks-in-go-e0a
 ##### Functions
 - Functions are normal functions defined without any receiver, which means functions are not bound to any types in general.
 
-#### Interface & Decoupling
+#### Decoupling using interface
 
 - Interface is a contract with pre-defined set of methods
 - Any type which has its method set as a superset to the interface method set, are said to agree to the contract.
