@@ -49,8 +49,11 @@
              * [Sync.Mutex](#syncmutex)
              * [Sync.WaitGroup](#syncwaitgroup)
 * [Channels](#channels)
-     * [What are Channels?](#what-are-channels?)
+     * [What are Channels?](#what-are-channels)
      * [Types of channels and usage](#types-of-channels-and-usage)
+        * [Buffered Channels](#buffered-channels)
+        * [Unbuffered Channels](#unbuffered-channels)
+        * [Usage](#usage)
 - - - -
 
 ### What is Go?
@@ -392,11 +395,11 @@ wg.Done()
 - Channels are inherently synchronized. :) 
 #### Types of channels and usage
 - There are two types of channels
-##### Unbuffered Channels:
+##### Unbuffered Channels
 - Channels without capacity are known as Unbuffered channels, therefore it requires both goroutines to make the exchange of resources
 - When one tries to send resources over a channel, and there’s no goroutine to receive it, the sender goroutine is locked and made to wait.
 - Similarly, when one goroutine tries to receive the resource, and there’s no one to send it, the receiver goroutine is locked and made to wait.
-##### Buffered Channels:
+##### Buffered Channels
 - Buffered channels have the capacity. Thus they behave quite differently.
 - When a buffered channel is full, and sender goroutine wants to send a resource over the channel, the sender goroutine is locked and made to wait.
 - When a buffered channel is empty, and receiver goroutine wants to receive a resource over a channel, the receiver goroutine is locked and made to wait.
