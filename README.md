@@ -21,7 +21,7 @@
     * [Struct](#struct)
         * [Methods](#methods)
         * [Functions](#functions)
-    * [Decoupling using interfaces](#decoupling_using_interface)
+    * [Decoupling using interfaces](#decoupling-using-interface)
 - - - -
 
 ### What is Go?
