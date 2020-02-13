@@ -56,7 +56,7 @@ Motto: A comprehensive document of Golang, with minimalistic, simple explanation
         * [Buffered Channels](#buffered-channels)
         * [Unbuffered Channels](#unbuffered-channels)
         * [Usage](#usage)
-
+* [An import with a blank identifier](#an-import-with-a-blank-identifier)
 TODO: 
 - Memory Management Golang
 	- Stack & Heap memory management	
@@ -427,3 +427,11 @@ wg.Done()
 - ‘<-’ operator is used along with channels.
 - channel <- data : puts data onto the channel
 - data := <- channel : receives data out of channel
+
+
+
+### An import with a blank identifier
+
+- Sometimes, we import a package for its side effects and not for its actual purpose. 
+- When a package is imported using a blank identifier, the compiler allows us to import it even when nothing from that package is explicitly being used in the current package. 
+- And during execution, the init function in the package imported with a  blank identifier still gets executed. It is said to be side effect caused by that particular package
