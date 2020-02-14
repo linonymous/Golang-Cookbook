@@ -66,7 +66,6 @@ TODO:
 	- Stack & Heap memory management	
 	- Garbage Collection
 	- Escape Analysis
-- type assertions
 - dependency management
 		- gomodules - submodules
 		- godep
