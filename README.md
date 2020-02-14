@@ -50,6 +50,7 @@ Motto: A comprehensive document of Golang, with minimalistic, simple explanation
         * [Synchronization](#synchronization)
              * [Sync.Mutex](#syncmutex)
              * [Sync.WaitGroup](#syncwaitgroup)
+        * [How many goroutines you can run](#how-many-goroutines-you-can-run)	     
 * [Channels](#channels)
      * [What are Channels?](#what-are-channels)
      * [Types of channels and usage](#types-of-channels-and-usage)
@@ -408,6 +409,19 @@ https://stackoverflow.com/questions/15983872/difference-between-user-level-and-k
 - When we want all goroutine to end to continue ahead in the program, we use sync.WaitGroup, which halts the program using wg.Wait() so that all goroutines registered with wg.Add(1), marks them as completed using
 wg.Done()
 - This helps in synchronizing multiple goroutines.  
+
+
+#### How many goroutines you can run
+
+- Considering 2KB size of a single goroutine(coexists), and 8GB of memory:
+	500 goroutines per 1MB
+    500,000 goroutines per 1GB
+  4,000,000 goroutines per 8GB
+
+- From the above calculations, it looks like, for goroutines of 2KB size on 8GB system, you may run as much as a million of goroutines without any cost involved.
+
+- Way to calculate memory used, get the memory usage before & after spawning a million of goroutines using runtime.ReadMemStats(). Subtract the old memory usage with latest and divide by the number of goroutines spawned. 
+There you get the average memory used per goroutine. :)
 
 ### Channels
 #### What are Channels?
