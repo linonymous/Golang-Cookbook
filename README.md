@@ -414,10 +414,11 @@ wg.Done()
 #### How many goroutines you can run
 
 - Considering 2KB size of a single goroutine, and 8GB of memory:
-When all goroutines coexists:
-	500 goroutines per 1MB
-    500,000 goroutines per 1GB
-  4,000,000 goroutines per 8GB
+
+	*	500 goroutines per 1MB </br>
+	*    500,000 goroutines per 1GB </br>
+	*  4,000,000 goroutines per 8GB </br>
+
 
 - From the above calculations, it looks like, for goroutines of 2KB size on 8GB system, you may run as much as a million of goroutines without any cost involved.
 
