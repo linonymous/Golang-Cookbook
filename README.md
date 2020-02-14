@@ -420,7 +420,7 @@ wg.Done()
 	*  4,000,000 goroutines per 8GB </br>
 
 
-- From the above calculations, it looks like, for goroutines of 2KB size on 8GB system, you may run as much as a million of goroutines without any cost involved.
+- From the above calculations, it looks like, for goroutines of 2KB size on 8GB system, you may run as much as a million of goroutines.
 
 - Way to calculate memory used, get the memory usage before & after spawning a million of goroutines using runtime.ReadMemStats(). Subtract the old memory usage with latest and divide by the number of goroutines spawned. 
 There you get the average memory used per goroutine. :)
