@@ -357,6 +357,7 @@ Every processor has a LOCAL RUN QUEUE. Goroutines in LRQ are picked up one by on
 - There is a GLOBAL RUN QUEUE, GRQ. GRQ is shared across all threads. As LRQ is local, thus, scheduler threads do not need the locks over it. But, GRQ locking is mandatory. Any task which is not assigned to any processor lives in GRQ. 
 Whenever the scheduler does not find any thread on LRQ, then it performs THREAD STEALING, that, it randomly accesses the LRQs of other processors (locking comes into picture) and steals half of the workload, means half of the goroutines, if not found, searches for goroutines in GRQ. 
 - Algorithm
+```
 runtime.schedule() {
     // only 1/61 of the time, check the global runnable queue for a G.
     // if not found, check the local queue.
@@ -365,6 +366,7 @@ runtime.schedule() {
     //     if not, check the global runnable queue.
     //     if not found, poll network.
 }
+```
 https://rakyll.org/scheduler/
 https://stackoverflow.com/questions/15983872/difference-between-user-level-and-kernel-supported-threads
 
