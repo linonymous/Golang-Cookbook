@@ -335,12 +335,13 @@ https://golang.org/doc/effective_go.html#embedding
 #### Goroutines Internals
 ##### Thread Basics
 - In Linux terminology, there are two types of threads, user-space threads(often called as green threads) and kernel space threads.
+
 https://www.andrew.cmu.edu/user/gkesden/ucsd/classes/sp16/cse120-a/applications/ln/cse120-sp16-lecture4.pdf
 http://www.cs.iit.edu/~cs561/cs450/ChilkuriDineshThreads/dinesh's%20files/User%20and%20Kernel%20Level%20Threads.html
 - Kernel space threads are created and managed by OS. It runs kernel code and is not associated with any userspace process. Kernel maintains a table for all kernel threads. Thus, the scheduler can give priority to a process with a large number of threads over the process with comparatively fewer threads.
 - Kernel level threads, on the contrary, are inefficient and slow.
 - Kernel-Level threads make concurrency much cheaper than process because much less state to allocate and initialize. However, for fine-grained concurrency, kernel-level threads still suffer from too much overhead in context switching because thread operations still require system calls. Ideally, we require thread operations to be as fast as a procedure call. Kernel-Level threads have to be general to support the needs of all programmers, languages, runtimes, etc. For such fine-grained concurrency we still need "cheaper" threads.
-- To make threads cheap and fast, they need to be implemented at the user level. User-Level threads are managed entirely by the run-time system (user-level library).The kernel knows nothing about user-level threads and manages them as if they were single-threaded processes.User-Level threads are small and fast, each thread is represented by a PC, register, stack, and small thread control block. Creating a new thread, switching between threads, and synchronizing threads are done via procedure call. i.e no kernel involvement. User-Level threads are hundred times faster than Kernel-Level threads.
+- To make threads cheap and fast, they need to be implemented at the user level. User-Level threads are managed entirely by the run-time system (user-level library).The kernel knows nothing about user-level threads and manages them as if they were single-threaded processes.User-Level threads are small and fast, each thread is represented by a PC, register, stack, and small thread control block. Creating a new thread, switching between threads, and synchronizing threads are done via procedure call. i.e no kernel involvement. User-Level threads are hundred times faster than Kernel-Level threads. But, user level threads are not optimized for scheduling, as kernel has less or no information about the user level threads, user level threads are not scheduled in optimized way.
 
 ##### Multiplexing Threads
 	
