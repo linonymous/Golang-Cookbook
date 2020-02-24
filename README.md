@@ -62,13 +62,18 @@ Motto: A comprehensive document of Golang, with minimalistic, simple explanation
     * [Usage](#usage)
 
 TODO: 
+https://povilasv.me/go-memory-management/
+https://go101.org/article/memory-block.html
+https://youtu.be/3CR4UNMK_Is
 - Memory Management Golang
 	- Stack & Heap memory management	
 	- Garbage Collection
 	- Escape Analysis
+	
 - dependency management
 		- gomodules - submodules
 		- godep
+		
 - Packaging basics
 	- Package designing
 	- workflow basics
