@@ -135,7 +135,10 @@ Modern application demands
 #### Interpreters and Compilers
 * Interpreters and compilers are very similar in structure. The main difference is that an interpreter directly executes the instructions in the source programming language while a compiler translates those instructions into efficient machine code.
 ##### Compiler
+
+
 (HLL - Machine Understandable code (assembly) - Machine)
+
 - Lexical Analysis - find lexemes & tokens (keywords, identifier, operators in language)
 - Syntax Analysis - generates Abstract syntax tree(AST) using a sequence of tokens and validates the syntax
 - Semantic Analysis - Type inference, type checking
@@ -214,6 +217,8 @@ Modern application demands
 
 https://medium.com/dm03514-tech-blog/sre-debugging-simple-memory-leaks-in-go-e0a9e6d63d4d
 
+- - - - - - - 
+
 ### interface and struct
 
 - https://www.ardanlabs.com/blog/2018/03/interface-values-are-valueless.html
@@ -285,17 +290,19 @@ https://golang.org/doc/effective_go.html#embedding
 #### make vs new
 
 #### new
-- Is a built-in function that allocates memory, but unlike its namesakes in some other languages it does not initialize the memory, it only zeros it. That is, new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T. In Go terminology, it returns a pointer to a newly allocated zero value of type T.
+- It is a built-in function that allocates memory, but unlike its namesakes in some other languages it does not initialize the memory, it only zeros it. That is, new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T. In Go terminology, it returns a pointer to a newly allocated zero value of type T.
 
 #### make 
 - Creates slices, maps, and channels only, and it returns an initialized (not zeroed) value of type T (not *T).
 - The reason for the distinction is that these three types represent, under the covers, references to data structures that must be initialized before use. A slice, for example, is a three-item descriptor containing a pointer to the data (inside an array), the length, and the capacity, and until those items are initialized, the slice is nil. For slices, maps, and channels, make initializes the internal data structure and prepares the value for use. 
 
+- - - -
 ### Leaky Buffer
 - also called as Buffer pools
 - Whenever we are using buffers in our code, some functions just use buffers for storage, we allocate them at the start of the function and leave them for the garbage collector to clean. 
 - In some applications, this is frustrating for garbage collectors and has a performance impact. Thus, it is recommended to use buffer pools, and allocate them in advance and use them whenever required. These buffers are called leaky buffers or buffer pools. :) 
 
+----
 ### Error handling
 
 #### Error
@@ -326,7 +333,7 @@ https://golang.org/doc/effective_go.html#embedding
 - Try   - Catch   - Finally
 - Panic - Recover - Defer
 
-
+----
 ### Goroutines
 
 #### What are goroutines?
@@ -457,15 +464,13 @@ There you get the average memory used per goroutine. :)
 - ‘<-’ operator is used along with channels.
 - channel <- data : puts data onto the channel
 - data := <- channel : receives data out of channel
-
-
-
+----
 ### An import with a blank identifier
 
 - Sometimes, we import a package for its side effects and not for its actual purpose. 
 - When a package is imported using a blank identifier, the compiler allows us to import it even when nothing from that package is explicitly being used in the current package. 
 - And during execution, the init function in the package imported with a  blank identifier still gets executed. It is said to be side effect caused by that particular package
-
+----
 ### Type Assertions
 
 - As the name suggests, we can assert if the value held is of a certain type.
@@ -476,4 +481,3 @@ There you get the average memory used per goroutine. :)
     - bool is true if the assertion is valid, else it is false.
     - if the assertion is valid, then value gets assigned the value of the type it is asserted against. 
 - switch value.(typename) { } Switch case also supports type assertion
-
